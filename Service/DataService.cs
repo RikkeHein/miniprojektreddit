@@ -19,10 +19,7 @@ namespace miniprojektreddit.Service
         //Seeder noget nyt data i databasen hvis der ikke findes noget i forvejen.
         public void SeedData()
         {
-            User u4 = new User("Peter");
-            db.Users.Add(u4);
-
-            /*
+          
             // Seed users
             User u1 = db.Users.FirstOrDefault();
             if (u1 == null)
@@ -88,7 +85,7 @@ namespace miniprojektreddit.Service
                 t3 = new Thread("How to clean your bucket", u3, "You take some and soap and cry", new DateTime(2022, 10, 11, 10, 40, 20));
                 db.Threads.Add(t3);
             }
-            */
+            
 
             db.SaveChanges();
         }
@@ -96,13 +93,22 @@ namespace miniprojektreddit.Service
         //Henter alle threads i en liste til forsiden hvor forfatter også vises
         public List<Thread> GetThreads()
         {
-            return db.Threads.Include(t => t.Author).ToList();
+            return db.Threads.Include(t => t.User).ToList();
         }
 
         //Henter en bestemt tråd via id og viser tilhørende kommentar og forfatter 
         public Thread GetThreadWithComments(int id)
         {
-            return db.Threads.Include(t => t.Comments).ThenInclude(t => t.Author).FirstOrDefault(t => t.ThreadId == id); 
+            return db.Threads.Include(t => t.Comments).ThenInclude(t => t.User).FirstOrDefault(t => t.ThreadId == id); 
+        }
+
+        //creater en ny thread og tilføjer den til databasen
+        public string CreateThread (string title, int userId, string text, DateTime date)
+        {
+            User user = db.Users.FirstOrDefault(u => u.UserId == userId);
+            db.Threads.Add(new Thread { Title = title, User = user, Text = text, Date = date });
+            db.SaveChanges ();
+            return "Thread created";
         }
 
     }

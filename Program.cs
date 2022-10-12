@@ -9,7 +9,7 @@ using miniprojektreddit.Service;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Runtime.ConstrainedExecution;
-
+using Thread = miniprojektreddit.Model.Thread;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,7 +38,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dataService = scope.ServiceProvider.GetRequiredService<DataService>();
-  //  dataService.SeedData(); // Fylder data på, hvis databasen er tom. Ellers ikke.
+    dataService.SeedData(); // Fylder data på, hvis databasen er tom. Ellers ikke.
 }
 
 
@@ -53,6 +53,7 @@ app.Use(async (context, next) =>
     await next(context);
 });
 
+//Henter alle threads i en liste til forsiden hvor forfatter også vises
 app.MapGet("/api/threads", (DataService service) =>
 {
     return service.GetThreads().Select(t => new
@@ -61,8 +62,8 @@ app.MapGet("/api/threads", (DataService service) =>
         title = t.Title,
         author = new
         {
-            t.Author.UserId,
-            t.Author.Name
+            t.User.UserId,
+            t.User.Name
 
         },
         text = t.Text,
@@ -72,13 +73,20 @@ app.MapGet("/api/threads", (DataService service) =>
     });
 });
 
-
+//Henter en bestemt tråd via id og viser tilhørende kommentar og forfatter 
 app.MapGet("/api/thread/{id}", (DataService service, int id) =>
 {
     return service.GetThreadWithComments(id);
 });
 
+/*
+app.MapPost("/api/thread", (DataService service, Thread thread) => 
+{
+    string result = service.CreateThread(thread.Title, thread.User, thread.Text, thread.Date);
+    return new { message = result };
 
+});
+*/
 
 
 app.Run();
