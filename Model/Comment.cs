@@ -19,10 +19,8 @@ namespace miniprojektreddit.Model
         public string Text { get; set; }
         public User? Author { get; set; }
         public DateTime Date { get; set; }
-        public bool Upvote { get; set; }
-        public bool Downvote { get; set; }
-        public int UpvoteCount { get; set; }
-        public int DownvoteCount { get; set; }
+        public int? Upvote { get; set; }
+        public int? Downvote { get; set; }
 
     }
 }
