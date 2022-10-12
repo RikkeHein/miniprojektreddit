@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1704.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "miniprojektreddit", "miniprojektreddit.csproj", "{A7B0616C-71D6-43CE-BB00-C696DDFCFECC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7B0616C-71D6-43CE-BB00-C696DDFCFECC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7B0616C-71D6-43CE-BB00-C696DDFCFECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7B0616C-71D6-43CE-BB00-C696DDFCFECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7B0616C-71D6-43CE-BB00-C696DDFCFECC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {997BA8A4-9ED3-46E2-BA39-57514FF4D3CA}
+	EndGlobalSection
+EndGlobal
