@@ -79,14 +79,14 @@ app.MapGet("/api/thread/{id}", (DataService service, int id) =>
     return service.GetThreadWithComments(id);
 });
 
-/*
+
 app.MapPost("/api/thread", (DataService service, Thread thread) => 
 {
-    string result = service.CreateThread(thread.Title, thread.User, thread.Text, thread.Date);
+    string result = service.CreateThread(thread.Title, (int)thread.User.UserId, thread.Text, thread.Date);
     return new { message = result };
 
 });
-*/
+
 
 
 app.Run();
