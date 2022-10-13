@@ -23,9 +23,6 @@ namespace miniprojektreddit.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<long?>("AuthorUserId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
@@ -42,11 +39,14 @@ namespace miniprojektreddit.Migrations
                     b.Property<int?>("Upvote")
                         .HasColumnType("INTEGER");
 
+                    b.Property<long?>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("CommentId");
 
-                    b.HasIndex("AuthorUserId");
-
                     b.HasIndex("ThreadId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -55,9 +55,6 @@ namespace miniprojektreddit.Migrations
                 {
                     b.Property<long>("ThreadId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long?>("AuthorUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Date")
@@ -77,9 +74,12 @@ namespace miniprojektreddit.Migrations
                     b.Property<int?>("Upvote")
                         .HasColumnType("INTEGER");
 
+                    b.Property<long?>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("ThreadId");
 
-                    b.HasIndex("AuthorUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Threads");
                 });
@@ -101,24 +101,24 @@ namespace miniprojektreddit.Migrations
 
             modelBuilder.Entity("miniprojektreddit.Model.Comment", b =>
                 {
-                    b.HasOne("miniprojektreddit.Model.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorUserId");
-
                     b.HasOne("miniprojektreddit.Model.Thread", null)
                         .WithMany("Comments")
                         .HasForeignKey("ThreadId");
 
-                    b.Navigation("Author");
+                    b.HasOne("miniprojektreddit.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("miniprojektreddit.Model.Thread", b =>
                 {
-                    b.HasOne("miniprojektreddit.Model.User", "Author")
+                    b.HasOne("miniprojektreddit.Model.User", "User")
                         .WithMany()
-                        .HasForeignKey("AuthorUserId");
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("Author");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("miniprojektreddit.Model.Thread", b =>

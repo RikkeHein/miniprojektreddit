@@ -29,7 +29,7 @@ namespace miniprojektreddit.Migrations
                     ThreadId = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
-                    AuthorUserId = table.Column<long>(type: "INTEGER", nullable: true),
+                    UserId = table.Column<long>(type: "INTEGER", nullable: true),
                     Text = table.Column<string>(type: "TEXT", nullable: false),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Upvote = table.Column<int>(type: "INTEGER", nullable: true),
@@ -39,8 +39,8 @@ namespace miniprojektreddit.Migrations
                 {
                     table.PrimaryKey("PK_Threads", x => x.ThreadId);
                     table.ForeignKey(
-                        name: "FK_Threads_Users_AuthorUserId",
-                        column: x => x.AuthorUserId,
+                        name: "FK_Threads_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId");
                 });
@@ -52,7 +52,7 @@ namespace miniprojektreddit.Migrations
                     CommentId = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Text = table.Column<string>(type: "TEXT", nullable: false),
-                    AuthorUserId = table.Column<long>(type: "INTEGER", nullable: true),
+                    UserId = table.Column<long>(type: "INTEGER", nullable: true),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Upvote = table.Column<int>(type: "INTEGER", nullable: true),
                     Downvote = table.Column<int>(type: "INTEGER", nullable: true),
@@ -67,16 +67,11 @@ namespace miniprojektreddit.Migrations
                         principalTable: "Threads",
                         principalColumn: "ThreadId");
                     table.ForeignKey(
-                        name: "FK_Comments_Users_AuthorUserId",
-                        column: x => x.AuthorUserId,
+                        name: "FK_Comments_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_AuthorUserId",
-                table: "Comments",
-                column: "AuthorUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_ThreadId",
@@ -84,9 +79,14 @@ namespace miniprojektreddit.Migrations
                 column: "ThreadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Threads_AuthorUserId",
+                name: "IX_Comments_UserId",
+                table: "Comments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Threads_UserId",
                 table: "Threads",
-                column: "AuthorUserId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
