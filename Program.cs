@@ -73,18 +73,45 @@ app.MapGet("/api/threads", (DataService service) =>
     });
 });
 
-//Henter en bestemt tråd via id og viser tilhørende kommentar og forfatter 
+//Henter en bestemt tråd via id og viser tilhørende kommentar og user 
 app.MapGet("/api/thread/{id}", (DataService service, int id) =>
 {
-    return service.GetThreadWithComments(id);
+    return service.GetThread(id);
 });
 
 
+//Henter alle kommentar 
+app.MapGet("/api/comments{id}", (DataService service, int id) =>
+{
+    return service.GetComments(id).Select(c => new
+    {
+        threadId = c.ThreadId,
+        author = new
+        {
+            c.User.UserId,
+            c.User.Name
+
+        },
+        text = c.Text,
+        date = c.Date,
+        upvote = c.Upvote,
+        downvote = c.Downvote
+    });
+}); 
+
+//Opretter en ny trår med titel, user id, text og dato 
 app.MapPost("/api/thread", (DataService service, Thread thread) => 
 {
     string result = service.CreateThread(thread.Title, (int)thread.User.UserId, thread.Text, thread.Date);
     return new { message = result };
 
+});
+
+
+app.MapPost("/api/thread/comment", (DataService service, Comment comment, int threadId) =>
+{
+    string result = service.CreateComment(comment.Text, (int)comment.User.UserId, comment.Date, threadId);
+    return new { message = result };
 });
 
 

@@ -10,17 +10,6 @@ namespace miniprojektreddit.Model
             this.Text = text;
             this.Date = date;
         }
-
-        public Thread(string title, User user, string text, DateTime date, List<Comment> comments)
-        {
-            this.Title = title;
-            this.User = user;
-            this.Text = text;
-            this.Date = date;
-            this.Comments = comments;
-        }
-
-
         public Thread()
         {
 
@@ -33,7 +22,6 @@ namespace miniprojektreddit.Model
         public DateTime Date { get; set; }
         public int? Upvote { get; set; }
         public int? Downvote { get; set; }
-        public List<Comment>? Comments { get; set; } = new List<Comment>();
     }
 }
 
