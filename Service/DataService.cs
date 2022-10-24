@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using miniprojektreddit.Model;
 using Thread = miniprojektreddit.Model.Thread;
@@ -14,12 +15,12 @@ namespace miniprojektreddit.Service
             this.db = db;
         }
 
-    
+
 
         //Seeder noget nyt data i databasen hvis der ikke findes noget i forvejen.
         public void SeedData()
         {
-          
+
             // Seed users
             User u1 = db.Users.FirstOrDefault();
             if (u1 == null)
@@ -66,7 +67,7 @@ namespace miniprojektreddit.Service
 
             // Seed comments
             Comment c1 = db.Comments.FirstOrDefault();
-            if(c1 == null)
+            if (c1 == null)
             {
                 c1 = new Comment("Git is very tricky, git me a bucket!", u1, new DateTime(2022, 10, 12, 10, 52, 20), t1);
                 db.Comments.Add(c1);
@@ -86,8 +87,8 @@ namespace miniprojektreddit.Service
                 db.Comments.Add(c3);
             }
 
-            
-            
+
+
 
             db.SaveChanges();
         }
@@ -99,7 +100,7 @@ namespace miniprojektreddit.Service
         }
 
         //Henter en bestemt tråd via id
-       public Thread GetThread(int id)
+        public Thread GetThread(int id)
         {
             return db.Threads.Include(t => t.User).ToList().FirstOrDefault(t => t.ThreadId == id);
         }
@@ -110,26 +111,76 @@ namespace miniprojektreddit.Service
             return db.Comments.Include(c => c.Thread).ThenInclude(c => c.User).Where(c => c.Thread.ThreadId == id).ToList();
         }
 
+        //Henter alle users i en liste
+        public List<User> GetUsers()
+        {
+            return db.Users.ToList();
+        }
+
+        //Henter en bestemt user via id
+        public User GetUser(int id)
+        {
+            return db.Users.FirstOrDefault(u => u.UserId == id);
+        }
+
         //creater en ny thread og tilføjer den til databasen
-        public string CreateThread (string title, int userId, string text, DateTime date)
+        public string CreateThread(string title, int userId, string text, DateTime date)
         {
             User user = db.Users.FirstOrDefault(u => u.UserId == userId);
             db.Threads.Add(new Thread { Title = title, User = user, Text = text, Date = date });
-            db.SaveChanges ();
+            db.SaveChanges();
             return "Thread created";
         }
 
 
         //creater en ny Comment og tilføjer den til databasen
-        public string CreateComment(string text, int userId, DateTime date, int threadId) 
-        { 
-            User user = db.Users.FirstOrDefault(u => u.UserId == userId); 
-            Thread thread = db.Threads.FirstOrDefault(t => t.ThreadId == threadId); 
-            db.Comments.Add(new Comment { Text = text, User = user, Date = date, Thread = thread});    
-            db.SaveChanges(); 
-            return "Comment created"; 
+        public string CreateComment(string text, int userId, DateTime date, int threadId)
+        {
+            User user = db.Users.FirstOrDefault(u => u.UserId == userId);
+            Thread thread = db.Threads.FirstOrDefault(t => t.ThreadId == threadId);
+            db.Comments.Add(new Comment { Text = text, User = user, Date = date, Thread = thread });
+            db.SaveChanges();
+            return "Comment created";
         }
-        
+
+        public string UpvoteThread(int threadId)
+        {
+            Thread thread = db.Threads.Where(t => t.ThreadId == threadId).First();
+            thread.Upvote++;
+            db.SaveChanges();
+            return "Thread upvote created";
+
+        }
+
+        public string DownvoteThread(int threadId)
+        {
+            Thread thread = db.Threads.Where(t => t.ThreadId == threadId).First();
+            thread.Downvote--;
+            db.SaveChanges();
+            return "Thread downvote created";
+
+        }
+
+        public string UpvoteComment(int commentId)
+        {
+            Comment comment = db.Comments.Where(c => c.CommentId == commentId).First();
+            comment.Upvote++;
+            db.SaveChanges();
+            return "Comment upvote created";
+
+        }
+
+        public string DownvoteComment(int commentId)
+        {
+            Comment comment = db.Comments.Where(c => c.CommentId == commentId).First();
+            comment.Downvote--;
+            db.SaveChanges();
+            return "Comment downvote created";
+
+        }
+
+
+
     }
 }
 
