@@ -1,16 +1,14 @@
 ﻿<Properties StartupConfiguration="{A7B0616C-71D6-43CE-BB00-C696DDFCFECC}|https">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.miniprojektreddit PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Service/DataService.cs">
     <Files>
-      <File FileName="Model/Comment.cs" Line="22" Column="41" />
+      <File FileName="Model/Comment.cs" Line="28" Column="1" />
       <File FileName="Model/User.cs" Line="21" Column="1" />
-      <File FileName="Model/Thread.cs" Line="28" Column="1" />
+      <File FileName="Model/Thread.cs" Line="17" Column="1" />
       <File FileName="Model/RedditContext.cs" Line="1" Column="1" />
-      <File FileName="Program.cs" Line="1" Column="1" />
+      <File FileName="Program.cs" Line="85" Column="2" />
+      <File FileName="Service/DataService.cs" Line="109" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -18,8 +16,7 @@
           <Node name="miniprojektreddit" expanded="True">
             <Node name="miniprojektreddit" expanded="True">
               <Node name="Model" expanded="True" />
-              <Node name="Properties" expanded="True" />
-              <Node name="Program.cs" selected="True" />
+              <Node name="Service" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -29,6 +26,9 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.miniprojektreddit PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

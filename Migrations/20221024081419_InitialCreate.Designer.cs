@@ -11,7 +11,7 @@ using miniprojektreddit.Model;
 namespace miniprojektreddit.Migrations
 {
     [DbContext(typeof(RedditContext))]
-    [Migration("20221014105453_InitialCreate")]
+    [Migration("20221024081419_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,7 @@ namespace miniprojektreddit.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<long>("ThreadId")
+                    b.Property<long?>("ThreadId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("Upvote")
@@ -45,6 +45,8 @@ namespace miniprojektreddit.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("CommentId");
+
+                    b.HasIndex("ThreadId");
 
                     b.HasIndex("UserId");
 
@@ -101,9 +103,15 @@ namespace miniprojektreddit.Migrations
 
             modelBuilder.Entity("miniprojektreddit.Model.Comment", b =>
                 {
+                    b.HasOne("miniprojektreddit.Model.Thread", "Thread")
+                        .WithMany()
+                        .HasForeignKey("ThreadId");
+
                     b.HasOne("miniprojektreddit.Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Thread");
 
                     b.Navigation("User");
                 });

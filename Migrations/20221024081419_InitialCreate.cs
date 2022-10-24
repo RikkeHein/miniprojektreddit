@@ -23,29 +23,6 @@ namespace miniprojektreddit.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    CommentId = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Text = table.Column<string>(type: "TEXT", nullable: false),
-                    UserId = table.Column<long>(type: "INTEGER", nullable: true),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Upvote = table.Column<int>(type: "INTEGER", nullable: true),
-                    Downvote = table.Column<int>(type: "INTEGER", nullable: true),
-                    ThreadId = table.Column<long>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.CommentId);
-                    table.ForeignKey(
-                        name: "FK_Comments_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Threads",
                 columns: table => new
                 {
@@ -67,6 +44,39 @@ namespace miniprojektreddit.Migrations
                         principalTable: "Users",
                         principalColumn: "UserId");
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    CommentId = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Text = table.Column<string>(type: "TEXT", nullable: false),
+                    UserId = table.Column<long>(type: "INTEGER", nullable: true),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Upvote = table.Column<int>(type: "INTEGER", nullable: true),
+                    Downvote = table.Column<int>(type: "INTEGER", nullable: true),
+                    ThreadId = table.Column<long>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.CommentId);
+                    table.ForeignKey(
+                        name: "FK_Comments_Threads_ThreadId",
+                        column: x => x.ThreadId,
+                        principalTable: "Threads",
+                        principalColumn: "ThreadId");
+                    table.ForeignKey(
+                        name: "FK_Comments_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_ThreadId",
+                table: "Comments",
+                column: "ThreadId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_UserId",

@@ -80,26 +80,13 @@ app.MapGet("/api/thread/{id}", (DataService service, int id) =>
 });
 
 
-//Henter alle kommentar 
-app.MapGet("/api/comments{id}", (DataService service, int id) =>
+//Henter alle kommentar der tilhører en bestemt tråd via dennes id
+app.MapGet("/api/comments/{id}", (DataService service, int id) =>
 {
-    return service.GetComments(id).Select(c => new
-    {
-        threadId = c.ThreadId,
-        author = new
-        {
-            c.User.UserId,
-            c.User.Name
-
-        },
-        text = c.Text,
-        date = c.Date,
-        upvote = c.Upvote,
-        downvote = c.Downvote
-    });
+    return service.GetComments(id);
 }); 
 
-//Opretter en ny trår med titel, user id, text og dato 
+//Opretter en ny tråd med titel, user id, text og dato 
 app.MapPost("/api/thread", (DataService service, Thread thread) => 
 {
     string result = service.CreateThread(thread.Title, (int)thread.User.UserId, thread.Text, thread.Date);
@@ -107,10 +94,10 @@ app.MapPost("/api/thread", (DataService service, Thread thread) =>
 
 });
 
-
-app.MapPost("/api/thread/comment", (DataService service, Comment comment, int threadId) =>
+// Opretter en ny kommentar, som hører til en bestemt tråd
+app.MapPost("/api/thread/comment", (DataService service, Comment comment) =>
 {
-    string result = service.CreateComment(comment.Text, (int)comment.User.UserId, comment.Date, threadId);
+    string result = service.CreateComment(comment.Text, (int)comment.User.UserId, comment.Date, (int)comment.Thread.ThreadId);
     return new { message = result };
 });
 
