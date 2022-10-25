@@ -1,15 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http.Json;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-
 using miniprojektreddit.Model;
 using miniprojektreddit.Service;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Runtime.ConstrainedExecution;
 using Thread = miniprojektreddit.Model.Thread;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,19 +19,17 @@ builder.Services.AddDbContext<RedditContext>(options => options.UseSqlite("Data 
 // Tilføj DataService så den kan bruges i endpoints
 builder.Services.AddScoped<DataService>();
 
-
 var app = builder.Build();
 
 // Seed data hvis nødvendigt.
 using (var scope = app.Services.CreateScope())
 {
-    var dataService = scope.ServiceProvider.GetRequiredService<DataService>(); dataService.SeedData(); // Fylder data på, hvis databasen er tom. Ellers ikke.
+    var dataService = scope.ServiceProvider.GetRequiredService<DataService>();
+    dataService.SeedData(); // Fylder data på, hvis databasen er tom. Ellers ikke.
 }
-
 
 app.UseHttpsRedirection();
 app.UseCors(AllowSomeStuff);
-
 
 // Middlware der kører før hver request. Sætter ContentType for alle responses til "JSON".
 app.Use(async (context, next) =>
@@ -58,7 +48,6 @@ app.MapGet("/api/thread/{id}", (DataService service, int id) =>
 {
     return service.GetThread(id);
 });
-
 
 //Henter alle kommentar der tilhører en bestemt tråd via dennes id
 app.MapGet("/api/comments/{id}", (DataService service, int id) =>
@@ -82,14 +71,12 @@ app.MapGet("/api/user/{id}", (DataService service, int id) =>
 app.MapPost("/api/thread", (DataService service, Thread thread) =>
 {
     string result = service.CreateThread(thread.Title, (int)thread.User.UserId, thread.Text, thread.Date); return new { message = result };
-
 });
 
 // Opretter en ny kommentar, som hører til en bestemt tråd
 app.MapPost("/api/thread/comment", (DataService service, Comment comment) =>
 {
     string result = service.CreateComment(comment.Text, (int)comment.User.UserId, comment.Date, (int)comment.Thread.ThreadId);
-
     return new { message = result };
 });
 
@@ -97,9 +84,7 @@ app.MapPost("/api/thread/comment", (DataService service, Comment comment) =>
 // PUT /api/post/{postId}/vote - Opdaterer en tråds antal stemmer
 app.MapPut("/api/threads/{threadId}/vote", (DataService service, Vote vote, int threadId) =>
 {
-
     string results = service.AddVoteThread(threadId, vote.Votes);
-
     return new { message = results };
 });
 
@@ -107,7 +92,6 @@ app.MapPut("/api/threads/{threadId}/vote", (DataService service, Vote vote, int 
 app.MapPut("/api/threads/comments/{commentId}/vote", (DataService service, Vote vote, int commentId) =>
 {
     string results = service.AddVoteComment(commentId, vote.Votes);
-
     return new { message = results };
 });
 

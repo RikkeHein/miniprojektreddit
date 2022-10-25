@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/rikkehein/Documents/miniprojektreddit/miniprojektreddit.csproj": {}
+    "/Users/ceciliewesterdahl/Projects/MiniprojektReddit/miniprojektreddit/miniprojektreddit.csproj": {}
   },
   "projects": {
-    "/Users/rikkehein/Documents/miniprojektreddit/miniprojektreddit.csproj": {
+    "/Users/ceciliewesterdahl/Projects/MiniprojektReddit/miniprojektreddit/miniprojektreddit.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/rikkehein/Documents/miniprojektreddit/miniprojektreddit.csproj",
+        "projectUniqueName": "/Users/ceciliewesterdahl/Projects/MiniprojektReddit/miniprojektreddit/miniprojektreddit.csproj",
         "projectName": "miniprojektreddit",
-        "projectPath": "/Users/rikkehein/Documents/miniprojektreddit/miniprojektreddit.csproj",
-        "packagesPath": "/Users/rikkehein/.nuget/packages/",
-        "outputPath": "/Users/rikkehein/Documents/miniprojektreddit/obj/",
+        "projectPath": "/Users/ceciliewesterdahl/Projects/MiniprojektReddit/miniprojektreddit/miniprojektreddit.csproj",
+        "packagesPath": "/Users/ceciliewesterdahl/.nuget/packages/",
+        "outputPath": "/Users/ceciliewesterdahl/Projects/MiniprojektReddit/miniprojektreddit/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/rikkehein/.nuget/NuGet/NuGet.Config"
+          "/Users/ceciliewesterdahl/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -72,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100-rc.2.22477.23/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
         }
       }
     }

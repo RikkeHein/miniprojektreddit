@@ -12,11 +12,11 @@ namespace miniprojektreddit.Model
             this.Date = date;
             this.Votes = votes;
         }
+
         public Thread()
         {
 
         }
-
    
         public long ThreadId { get; set; }
         public string Title { get; set; }

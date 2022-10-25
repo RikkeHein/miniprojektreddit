@@ -2,8 +2,7 @@
 namespace miniprojektreddit.Model
 {
     public class Comment
-    {
-       
+    { 
         public Comment(string text, User user, DateTime date, Thread thread, int votes = 0)
         {
             this.Text = text;
@@ -17,7 +16,6 @@ namespace miniprojektreddit.Model
         {
 
         }
-
 
         public long CommentId { get; set; }
         public string Text { get; set; }

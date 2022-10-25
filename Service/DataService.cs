@@ -1,12 +1,8 @@
-﻿using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.EntityFrameworkCore;
 using miniprojektreddit.Model;
 using Thread = miniprojektreddit.Model.Thread;
 
 namespace miniprojektreddit.Service
-
 {
     public class DataService
     {
@@ -16,13 +12,11 @@ namespace miniprojektreddit.Service
             this.db = db;
         }
 
-
-
         //Seeder noget nyt data i databasen hvis der ikke findes noget i forvejen.
         public void SeedData()
         {
-
             // Seed users
+            //----------------------------------------------------------------------------------------------
             User u1 = db.Users.FirstOrDefault();
             if (u1 == null)
             {
@@ -45,6 +39,7 @@ namespace miniprojektreddit.Service
             }
 
             // Seed threads
+            //----------------------------------------------------------------------------------------------
             Thread t1 = db.Threads.FirstOrDefault();
             if (t1 == null)
             {
@@ -67,6 +62,7 @@ namespace miniprojektreddit.Service
             }
 
             // Seed comments
+            //----------------------------------------------------------------------------------------------
             Comment c1 = db.Comments.FirstOrDefault();
             if (c1 == null)
             {
@@ -87,9 +83,6 @@ namespace miniprojektreddit.Service
                 c3 = new Comment("Who is Fred???", u3, new DateTime(2022, 10, 12, 10, 52, 22), t2);
                 db.Comments.Add(c3);
             }
-
-
-
 
             db.SaveChanges();
         }
@@ -132,7 +125,6 @@ namespace miniprojektreddit.Service
             db.SaveChanges();
             return "Thread created";
         }
-
 
         //creater en ny Comment og tilføjer den til databasen
         public string CreateComment(string text, int userId, DateTime date, int threadId)
@@ -185,10 +177,5 @@ namespace miniprojektreddit.Service
 
             return "Vote added";
         }
-
-
-
-
     }
 }
-
