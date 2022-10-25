@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using miniprojektreddit.Model;
 using Thread = miniprojektreddit.Model.Thread;
 
@@ -143,41 +144,48 @@ namespace miniprojektreddit.Service
             return "Comment created";
         }
 
-        public string UpvoteThread(int threadId)
+        // Tilføjer en stemme til en post
+        public string AddVoteThread(int threadId, bool vote)
         {
-            Thread thread = db.Threads.Where(t => t.ThreadId == threadId).First();
-            thread.Upvote++;
-            db.SaveChanges();
-            return "Thread upvote created";
+            if (vote == true)
+            {
+                Thread thread = db.Threads.Where(x => x.ThreadId == threadId).First();
 
+                thread.Votes++;
+            }
+            else if (vote == false)
+            {
+                Thread thread = db.Threads.Where(x => x.ThreadId == threadId).First();
+
+                thread.Votes--;
+            }
+
+            db.SaveChanges();
+
+            return "Vote added";
         }
 
-        public string DownvoteThread(int threadId)
+        // Tilføjer en stemme til en kommentar
+        public string AddVoteComment(int commentId, bool vote)
         {
-            Thread thread = db.Threads.Where(t => t.ThreadId == threadId).First();
-            thread.Downvote--;
-            db.SaveChanges();
-            return "Thread downvote created";
+            if (vote == true)
+            {
+                Comment comment = db.Comments.Where(x => x.CommentId == commentId).First();
 
+                comment.Votes++;
+            }
+            else if (vote == false)
+            {
+                Comment comment = db.Comments.Where(x => x.CommentId == commentId).First();
+
+                comment.Votes--;
+            }
+
+            db.SaveChanges();
+
+            return "Vote added";
         }
 
-        public string UpvoteComment(int commentId)
-        {
-            Comment comment = db.Comments.Where(c => c.CommentId == commentId).First();
-            comment.Upvote++;
-            db.SaveChanges();
-            return "Comment upvote created";
-
-        }
-
-        public string DownvoteComment(int commentId)
-        {
-            Comment comment = db.Comments.Where(c => c.CommentId == commentId).First();
-            comment.Downvote--;
-            db.SaveChanges();
-            return "Comment downvote created";
-
-        }
 
 
 

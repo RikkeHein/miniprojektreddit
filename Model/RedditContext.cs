@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace miniprojektreddit.Model
 {

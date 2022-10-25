@@ -32,8 +32,7 @@ namespace miniprojektreddit.Migrations
                     UserId = table.Column<long>(type: "INTEGER", nullable: true),
                     Text = table.Column<string>(type: "TEXT", nullable: false),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Upvote = table.Column<int>(type: "INTEGER", nullable: true),
-                    Downvote = table.Column<int>(type: "INTEGER", nullable: true)
+                    Votes = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,8 +53,7 @@ namespace miniprojektreddit.Migrations
                     Text = table.Column<string>(type: "TEXT", nullable: false),
                     UserId = table.Column<long>(type: "INTEGER", nullable: true),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Upvote = table.Column<int>(type: "INTEGER", nullable: true),
-                    Downvote = table.Column<int>(type: "INTEGER", nullable: true),
+                    Votes = table.Column<int>(type: "INTEGER", nullable: false),
                     ThreadId = table.Column<long>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>

@@ -1,14 +1,19 @@
 ﻿<Properties StartupConfiguration="{A7B0616C-71D6-43CE-BB00-C696DDFCFECC}|https">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Service/DataService.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
     <Files>
-      <File FileName="Model/Comment.cs" Line="28" Column="1" />
-      <File FileName="Model/User.cs" Line="21" Column="1" />
-      <File FileName="Model/Thread.cs" Line="17" Column="1" />
-      <File FileName="Model/RedditContext.cs" Line="1" Column="1" />
-      <File FileName="Program.cs" Line="85" Column="2" />
-      <File FileName="Service/DataService.cs" Line="109" Column="10" />
+      <File FileName="Model/Comment.cs" />
+      <File FileName="Model/User.cs" />
+      <File FileName="Model/Thread.cs" />
+      <File FileName="Model/RedditContext.cs" />
+      <File FileName="Program.cs" Line="114" Column="11" />
+      <File FileName="Service/DataService.cs" />
+      <File FileName="Model/Vote.cs" />
+      <File FileName="Properties/launchSettings.json" />
+      <File FileName="appsettings.json" />
+      <File FileName=".gitignore" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,13 +21,12 @@
           <Node name="miniprojektreddit" expanded="True">
             <Node name="miniprojektreddit" expanded="True">
               <Node name="Model" expanded="True" />
+              <Node name="Properties" expanded="True" />
               <Node name="Service" expanded="True" />
+              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
@@ -30,5 +34,4 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

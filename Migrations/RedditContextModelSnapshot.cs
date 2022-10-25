@@ -26,9 +26,6 @@ namespace miniprojektreddit.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Downvote")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -36,10 +33,10 @@ namespace miniprojektreddit.Migrations
                     b.Property<long?>("ThreadId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("Upvote")
+                    b.Property<long?>("UserId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long?>("UserId")
+                    b.Property<int>("Votes")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("CommentId");
@@ -60,9 +57,6 @@ namespace miniprojektreddit.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Downvote")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -71,10 +65,10 @@ namespace miniprojektreddit.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Upvote")
+                    b.Property<long?>("UserId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long?>("UserId")
+                    b.Property<int>("Votes")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ThreadId");

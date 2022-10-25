@@ -88,26 +88,27 @@ app.MapPost("/api/thread", (DataService service, Thread thread) =>
 // Opretter en ny kommentar, som hører til en bestemt tråd
 app.MapPost("/api/thread/comment", (DataService service, Comment comment) =>
 {
-    string result = service.CreateComment(comment.Text, (int)comment.User.UserId, comment.Date, (int)comment.Thread.ThreadId); return new { message = result };
+    string result = service.CreateComment(comment.Text, (int)comment.User.UserId, comment.Date, (int)comment.Thread.ThreadId);
+
+    return new { message = result };
 });
 
-app.MapPut("/api/thread/{threadid}/upvote", (DataService service, int threadId) =>
-{    string result = service.UpvoteThread(threadId);    return new { message = result };
-});
 
-app.MapPut("/api/thread/{id}/downvote", (DataService service, int id) =>
+// PUT /api/post/{postId}/vote - Opdaterer en tråds antal stemmer
+app.MapPut("/api/threads/{threadId}/vote", (DataService service, Vote vote, int threadId) =>
 {
-    string result = service.DownvoteThread(id); return new { message = result };
+
+    string results = service.AddVoteThread(threadId, vote.Votes);
+
+    return new { message = results };
 });
 
-app.MapPut("/api/comment/{id}/upvote", (DataService service, int id) =>
+// PUT /api/posts/comments/{commentId}/vote - Opdaterer en kommentars antal stemmer
+app.MapPut("/api/threads/comments/{commentId}/vote", (DataService service, Vote vote, int commentId) =>
 {
-    string result = service.UpvoteComment(id); return new { message = result };
-});
+    string results = service.AddVoteComment(commentId, vote.Votes);
 
-app.MapPut("/api/comment/{id}/downvote", (DataService service, int id) =>
-{
-    string result = service.DownvoteComment(id); return new { message = result };
+    return new { message = results };
 });
 
 app.Run();
