@@ -11,7 +11,7 @@ using miniprojektreddit.Model;
 namespace miniprojektreddit.Migrations
 {
     [DbContext(typeof(RedditContext))]
-    [Migration("20221024140728_InitialCreate")]
+    [Migration("20221026093144_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,23 +1,27 @@
 ﻿<Properties StartupConfiguration="{A7B0616C-71D6-43CE-BB00-C696DDFCFECC}|https">
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.miniprojektreddit PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Service/DataService.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
     <Files>
-      <File FileName="Model/Comment.cs" Line="5" Column="6" />
+      <File FileName="Model/Comment.cs" Line="17" Column="1" />
       <File FileName="Model/User.cs" Line="21" Column="1" />
-      <File FileName="Model/Thread.cs" Line="15" Column="1" />
-      <File FileName="Model/RedditContext.cs" Line="25" Column="1" />
-      <File FileName="Program.cs" Line="28" Column="5" />
-      <File FileName="Service/DataService.cs" Line="9" Column="42" />
-      <File FileName="Model/Vote.cs" Line="1" Column="1" />
+      <File FileName="Model/Thread.cs" Line="30" Column="1" />
+      <File FileName="Model/RedditContext.cs" Line="26" Column="1" />
+      <File FileName="Program.cs" Line="21" Column="43" />
+      <File FileName="Service/DataService.cs" Line="20" Column="1" />
+      <File FileName="Model/Vote.cs" Line="18" Column="1" />
+      <File FileName="appsettings.json" Line="1" Column="1" />
+      <File FileName="appsettings.Development.json" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="miniprojektreddit" expanded="True">
-            <Node name="miniprojektreddit" expanded="True">
+            <Node name="miniprojektreddit" expanded="True" selected="True">
               <Node name="Model" expanded="True" />
               <Node name="Service" expanded="True" />
+              <Node name="appsettings.json" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -27,8 +31,7 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.miniprojektreddit PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -17,7 +17,7 @@ namespace miniprojektreddit.Model
         {
 
         }
-   
+
         public long ThreadId { get; set; }
         public string Title { get; set; }
         public User? User { get; set; }

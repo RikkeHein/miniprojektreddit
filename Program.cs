@@ -13,6 +13,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: AllowSomeStuff, builder => { builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
 });
 
+
 // Tilføj DbContext factory som service.
 builder.Services.AddDbContext<RedditContext>(options => options.UseSqlite("Data Source=bin/RedditProjekt.db"));
 
