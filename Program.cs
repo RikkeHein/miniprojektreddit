@@ -39,42 +39,49 @@ app.Use(async (context, next) =>
 });
 
 //Henter alle threads i en liste til forsiden hvor forfatter også vises
+//Tidkompleksistet: Big O -> O(n) - linære tid - afhænger af elementer i arrayet 
 app.MapGet("/api/threads", (DataService service) =>
 {
     return service.GetThreads();
 });
 
 //Henter en bestemt tråd via id og viser tilhørende kommentar og user
+//Tidkompleksistet: Big O -> O(1) - konstant tid - tager en operation og hente via id 
 app.MapGet("/api/thread/{id}", (DataService service, int id) =>
 {
     return service.GetThread(id);
 });
 
 //Henter alle kommentar der tilhører en bestemt tråd via dennes id
+//Tidkompleksistet: Big O -> O(n) - linære tid - afhænger af elementer i arrayet 
 app.MapGet("/api/comments/{id}", (DataService service, int id) =>
 {
     return service.GetComments(id);
 });
 
 //Henter alle users
+//Tidkompleksistet: Big O -> O(n) - linære tid - afhænger af elementer i arrayet
 app.MapGet("/api/users", (DataService service) =>
 {
     return service.GetUsers();
 });
 
 //Henter en user på id
+//Tidkompleksistet: Big O -> O(1) - konstant tid - tager en operation og hente via id 
 app.MapGet("/api/user/{id}", (DataService service, int id) =>
 {
     return service.GetUser(id);
 });
 
 //Opretter en ny tråd med titel, user id, text og dato
+//Tidkompleksistet: Big O -> O(1) - konstant tid - tager kun en operation uanset størrelsen
 app.MapPost("/api/thread", (DataService service, Thread thread) =>
 {
     string result = service.CreateThread(thread.Title, (int)thread.User.UserId, thread.Text, thread.Date); return new { message = result };
 });
 
 // Opretter en ny kommentar, som hører til en bestemt tråd
+//Tidkompleksistet: Big O -> O(1) - konstant tid - tager kun en operation uanset størrelsen
 app.MapPost("/api/thread/comment", (DataService service, Comment comment) =>
 {
     string result = service.CreateComment(comment.Text, (int)comment.User.UserId, comment.Date, (int)comment.Thread.ThreadId);
@@ -83,6 +90,7 @@ app.MapPost("/api/thread/comment", (DataService service, Comment comment) =>
 
 
 // PUT /api/post/{postId}/vote - Opdaterer en tråds antal stemmer
+//Tidkompleksistet: Big O -> O(1) - konstant tid - tager kun en operation uanset størrelsen
 app.MapPut("/api/threads/{threadId}/vote", (DataService service, Vote vote, int threadId) =>
 {
     string results = service.AddVoteThread(threadId, vote.Votes);
@@ -90,6 +98,7 @@ app.MapPut("/api/threads/{threadId}/vote", (DataService service, Vote vote, int 
 });
 
 // PUT /api/posts/comments/{commentId}/vote - Opdaterer en kommentars antal stemmer
+//Tidkompleksistet: Big O -> O(1) - konstant tid - tager kun en operation uanset størrelsen
 app.MapPut("/api/threads/comments/{commentId}/vote", (DataService service, Vote vote, int commentId) =>
 {
     string results = service.AddVoteComment(commentId, vote.Votes);

@@ -188,36 +188,42 @@ namespace miniprojektreddit.Service
         }
 
         //Henter alle threads i en liste til forsiden hvor forfatter også vises
+        //Tidskompleksitet: Big O -> O(n) Linære - afhænger af antal elementer i listen
         public List<Thread> GetThreads()
         {
             return db.Threads.Include(t => t.User).ToList();
         }
 
         //Henter en bestemt tråd via id
+        //Tidskompleksitet: Big O -> O(1) konstant - henter en bestemt tråd vi id (et enkelt trin)
         public Thread GetThread(int id)
         {
             return db.Threads.Include(t => t.User).ToList().FirstOrDefault(t => t.ThreadId == id);
         }
 
-        //Henter en bestemt tråds kommentar 
+        //Henter en bestemt tråds kommentar
+        //Tidskompleksitet: Big O -> linær - afhænger af antal elementer i listen og filtering på kommentar
         public List<Comment> GetComments(int id)
         {
             return db.Comments.Include(c => c.Thread).ThenInclude(c => c.User).Where(c => c.Thread.ThreadId == id).ToList();
         }
 
         //Henter alle users i en liste
+        //Tidskompleksitet: Big O - O(n) Linære - afhænger af antal elementer i listen
         public List<User> GetUsers()
         {
             return db.Users.ToList();
         }
 
         //Henter en bestemt user via id
+        //Tidskompleksitet: Big O -  O(1) konstant - henter en bestemt user via id (et enkelt trin)
         public User GetUser(int id)
         {
             return db.Users.FirstOrDefault(u => u.UserId == id);
         }
 
         //creater en ny thread og tilføjer den til databasen
+        //Tidskompleksitet: Big O -> O(1) konstant - tager et enkelt trin at tilføje tråden til databasen 
         public string CreateThread(string title, int userId, string text, DateTime date)
         {
             User user = db.Users.FirstOrDefault(u => u.UserId == userId);
@@ -227,6 +233,7 @@ namespace miniprojektreddit.Service
         }
 
         //creater en ny Comment og tilføjer den til databasen
+        //Tidskompleksitet: Big O -> O(1) konstant - tager et enkelt trin at tilføje tråden til databasen
         public string CreateComment(string text, int userId, DateTime date, int threadId)
         {
             User user = db.Users.FirstOrDefault(u => u.UserId == userId);
@@ -237,6 +244,7 @@ namespace miniprojektreddit.Service
         }
 
         // Tilføjer en stemme til en post
+        //Tidskompleksitet: Big O -> O(1) konstant - tager et enkelt trin at opdater rækken i databasen
         public string AddVoteThread(int threadId, bool vote)
         {
             if (vote == true)
@@ -258,6 +266,7 @@ namespace miniprojektreddit.Service
         }
 
         // Tilføjer en stemme til en kommentar
+        //Tidskompleksitet: Big O -> O(1) konstant - tager et enkelt trin at tilføje vote rækken i databasen
         public string AddVoteComment(int commentId, bool vote)
         {
             if (vote == true)
